@@ -70,7 +70,7 @@ export class AuthService {
 
   private async generateAccessToken(userId: string) {
     return {
-      accessToken : await this.jwtService.signAsync({ sub: userId }) 
+      'access-token' : await this.jwtService.signAsync({ sub: userId }) 
     }
   }
 }
