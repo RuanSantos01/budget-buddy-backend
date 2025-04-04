@@ -1,5 +1,5 @@
 import { plainToInstance } from "class-transformer";
-import { IsJWT, IsNotEmpty, IsString, NotEquals, validateSync } from "class-validator";
+import { IsNotEmpty, IsString, NotEquals, validateSync } from "class-validator";
 
 class Env {
   @IsString()
