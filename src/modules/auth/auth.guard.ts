@@ -26,6 +26,7 @@ export class AuthGuard implements CanActivate {
     if (!token) {
       throw new UnauthorizedException();
     }
+
     try {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: env.jwtSecret
@@ -36,6 +37,7 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
     return true;
+    
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {

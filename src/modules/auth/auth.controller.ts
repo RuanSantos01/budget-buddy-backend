@@ -5,7 +5,6 @@ import { SignupDto } from './dto/signup.dto';
 import { IsPublic } from 'src/shared/decorators/IsPublic';
 
 @Controller('auth')
-@SetMetadata('IS_PUBLIC', true)
 @IsPublic()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
