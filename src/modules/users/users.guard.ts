@@ -6,7 +6,7 @@ import { env } from 'src/shared/config/env';
 import { IS_PUBLIC_KEY } from 'src/shared/decorators/IsPublic';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class UsersGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
     private reflector: Reflector,
@@ -27,8 +27,6 @@ export class AuthGuard implements CanActivate {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: env.jwtSecret,
       });
-
-      console.log(payload);
 
       if (!payload.isActive) throw new UnauthorizedException('User deleted.');
       request['userId'] = payload.sub;

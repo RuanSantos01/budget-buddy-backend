@@ -1,6 +1,6 @@
 import { IsBoolean, IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
-export class UserDto {
+export class User {
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -17,6 +17,4 @@ export class UserDto {
   @IsBoolean()
   @IsNotEmpty()
   isActive: boolean;
-
-  categories: Object;
 }

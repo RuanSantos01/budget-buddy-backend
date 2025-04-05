@@ -1,14 +1,33 @@
-import { Controller, Get} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
-import { ActiveUserId } from 'src/shared/decorators/ActiveUserId';
+import { CategoryDto } from './dto/category.dto';
 
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
-  @Get()
-  findAll(@ActiveUserId() userId: string) {
-    return this.categoriesService.findAllCategoriesByUserId(userId);
+  @Post('many')
+  insertMany(@Body() categoryDto: CategoryDto[]) {
+    return this.categoriesService.insertMany(categoryDto);
   }
 
+  @Post()
+  create(@Body() categoryDto: CategoryDto) {
+    return this.categoriesService.create(categoryDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.categoriesService.findAll();
+  }
+
+  @Delete()
+  delete(@Query('id') id: string) {
+    return this.categoriesService.delete(id);
+  }
+
+  @Put()
+  update(@Query('id') id: string, @Body() categoryDto: CategoryDto) {
+    return this.categoriesService.update(id, categoryDto);
+  }
 }

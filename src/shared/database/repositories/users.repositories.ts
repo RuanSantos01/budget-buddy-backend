@@ -14,7 +14,7 @@ export class UsersRepository {
     return this.prisma.user.findUnique(findUniqueDto);
   }
 
-  async logicalDeleteUser(deleteUserDto: Prisma.UserUpdateArgs) {
+  async updateUser(deleteUserDto: Prisma.UserUpdateArgs) {
     return this.prisma.user.update(deleteUserDto);
   }
 }
