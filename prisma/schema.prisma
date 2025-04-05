@@ -69,7 +69,7 @@ model Transaction {
   bankAccountId String   @map("bank_account_id") @db.Uuid
   name          String
   value         Float
-  date          DateTime
+  createdAt     DateTime
 
   type TransactionType
 
