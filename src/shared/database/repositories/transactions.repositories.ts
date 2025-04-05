@@ -14,21 +14,22 @@ export class TransactionsRepository {
     return this.prisma.transaction.findUnique(findTransactionDto);
   }
 
-  async findMany(params: { skip: number; take: number, sort?: Prisma.TransactionOrderByWithRelationInput }) {
+  async findMany(params: { skip: number; take: number, sort?: Prisma.TransactionOrderByWithRelationInput, where?: Prisma.TransactionWhereInput }) {
     return this.prisma.transaction.findMany({
       skip: params.skip,
       take: params.take,
-      orderBy: params.sort
+      orderBy: params.sort,
+      where: params.where
     });
   }
 
-  async count() {
-    return this.prisma.transaction.count();
+  async count(params: Prisma.TransactionCountArgs) {
+    return this.prisma.transaction.count(params);
   }
 
-  async remove(id: string) {
+  async remove(userId: string, id: string) {
     return this.prisma.transaction.delete({
-      where: { id },
+      where: { id, userId },
     });
   };
 

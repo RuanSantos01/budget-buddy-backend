@@ -18,28 +18,39 @@ export class TransactionsController {
 
   @Get()
   findAll(
+    @ActiveUserId() userId: string,
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 10,
     @Query('sort') sort: 'asc' | 'desc' = 'desc'
   ) {
-    return this.transactionsService.findAll(Number(page), Number(limit), {
+    return this.transactionsService.findAll(userId, Number(page), Number(limit), {
       createdAt: sort,
     });
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.transactionsService.findOne(id);
+  findOne(
+    @ActiveUserId() userId: string,
+    @Param('id') id: string
+  ) {
+    return this.transactionsService.findOne(userId, id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTransactionDto: UpdateTransactionDto) {
-    return this.transactionsService.update(id, updateTransactionDto);
+  update(
+    @ActiveUserId() userId: string,
+    @Param('id') id: string, 
+    @Body() updateTransactionDto: UpdateTransactionDto
+  ) {
+    return this.transactionsService.update(userId, id, updateTransactionDto);
   }
 
   @Delete(':id')
   @HttpCode(204)
-  remove(@Param('id') id: string) {
-    return this.transactionsService.remove(id);
+  remove(
+    @ActiveUserId() userId: string,
+    @Param('id') id: string
+  ) {
+    return this.transactionsService.remove(userId, id);
   }
 }

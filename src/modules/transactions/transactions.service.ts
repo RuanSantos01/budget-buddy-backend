@@ -36,16 +36,17 @@ export class TransactionsService {
     }
   }
 
-  async findAll(page: number = 1, limit: number = 10, sort: Prisma.TransactionOrderByWithRelationInput = { createdAt: 'desc' }) {
+  async findAll(userId: string, page: number = 1, limit: number = 10, sort: Prisma.TransactionOrderByWithRelationInput = { createdAt: 'desc' }) {
     const offset = (page - 1) * limit;
   
     const [transactions, total] = await Promise.all([
       this.transactionsRepo.findMany({
         skip: offset,
         take: limit,
-        sort
+        sort,
+        where: { userId }
       }),
-      this.transactionsRepo.count(),
+      this.transactionsRepo.count({ where: { userId } }),
     ]);
   
     return {
@@ -62,9 +63,12 @@ export class TransactionsService {
     };
   }
 
-  async findOne(transactionId: string) {
+  async findOne(userId: string, transactionId: string) {
     const transaction = await this.transactionsRepo.findUnique({
-      where: { id: transactionId }
+      where: { 
+        id: transactionId,
+        userId
+       }
     });
 
     if (!transaction)
@@ -76,10 +80,13 @@ export class TransactionsService {
     }
   }
 
-  async update(transactionId: string, updateTransactionDto: UpdateTransactionDto) {
+  async update(userId: string, transactionId: string, updateTransactionDto: UpdateTransactionDto) {
     try {
       const updatedTransaction = await this.transactionsRepo.update({
-        where: { id: transactionId },
+        where: { 
+          id: transactionId,
+          userId
+        },
         data: updateTransactionDto,
       });
   
@@ -93,7 +100,7 @@ export class TransactionsService {
     }
   }
 
-  remove(transactionId: string) {
-    return this.transactionsRepo.remove(transactionId);
+  remove(userId: string, transactionId: string) {
+    return this.transactionsRepo.remove(userId, transactionId);
   }
 }
