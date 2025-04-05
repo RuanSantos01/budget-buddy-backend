@@ -1,6 +1,6 @@
-import { Controller, Get, Req } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { Controller, Get, Put } from '@nestjs/common';
 import { ActiveUserId } from 'src/shared/decorators/ActiveUserId';
+import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
@@ -9,5 +9,10 @@ export class UsersController {
   @Get('me')
   me(@ActiveUserId() userId: string) {
     return this.usersService.getUserById(userId);
+  }
+
+  @Put('delete')
+  logicalDeleteUser(@ActiveUserId() userId: string) {
+    return this.usersService.logicalDeleteUser(userId);
   }
 }
