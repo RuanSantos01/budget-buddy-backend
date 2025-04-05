@@ -27,6 +27,7 @@ model BankAccount {
   bankIspbId String @map("bank_ispb_id")
   name       String
   balance    Float  @map("balance")
+  createdAt  DateTime
 
   transactions Transaction[]
 
@@ -67,7 +68,7 @@ model Transaction {
   bankAccountId String   @map("bank_account_id") @db.Uuid
   name          String
   value         Float
-  date          DateTime
+  createdAt     DateTime
 
   type TransactionType
 

@@ -6,12 +6,14 @@ import { UsersGuard } from './modules/users/users.guard';
 import { UsersModule } from './modules/users/users.module';
 import { env } from './shared/config/env';
 import { DatabaseModule } from './shared/database/database.module';
+import { TransactionsModule } from './modules/transactions/transactions.module';
 
 @Module({
   imports: [
     UsersModule,
     DatabaseModule,
     CategoriesModule,
+    TransactionsModule,
     JwtModule.register({
       global: true,
       secret: env.jwtSecret,
