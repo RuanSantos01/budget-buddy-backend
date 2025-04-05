@@ -72,7 +72,7 @@ export class TransactionsService {
     });
 
     if (!transaction)
-      throw new UnprocessableEntityException('Transaction not found');
+      throw new UnprocessableEntityException('Bank account not found or user not authorized to see this resource.');
 
     return {
       ...transaction,
