@@ -1,7 +1,7 @@
 import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcryptjs';
-import { CodeReturn } from 'src/shared/enum/code-return.enum';
+import { CodeReturn } from 'src/shared/enums/code-return.enum';
 import { UsersService } from '../users/users.service';
 import { SignupDto } from './dto/signup.dto';
 import { SigninDto } from './dto/singin.dto';

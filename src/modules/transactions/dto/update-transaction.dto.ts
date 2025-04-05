@@ -1,26 +1,26 @@
-import { IsEnum, IsInt, IsNotEmpty, IsString, Min } from 'class-validator';
+import { IsEnum, IsInt, IsOptional, IsString, Min } from 'class-validator';
 import { TransactionType } from 'src/shared/enums/transaction-type.enum';
 
-export class CreateTransactionDto {
+export class UpdateTransactionDto {
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
   categoryId: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   bankAccountId: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsInt()
   @Min(0)
   value: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(TransactionType, { message: 'Type must be either INCOME or EXPENSE' })
   type: TransactionType;
 
